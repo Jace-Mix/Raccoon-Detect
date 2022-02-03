@@ -1,0 +1,40 @@
+== Requirements ==
+This project uses Dat Tran's raccoon dataset for object detection, which can be found here:
+https://github.com/datitran/raccoon_dataset
+
+The only folders that are required are the "annotations" and "images" folders. Those folders should be placed within the provided "raccoons" folder.
+
+== Libraries used ==
+TensorFlow/Keras - main Machine Learning framework used in this project
+SciPy/NumPy - general calculation libraries
+os/imutils - system pathing for finding and exporting images/files
+pickle - encoder saving/retrieval
+BeautifulSoup - library for handling files
+matplotlib - graphing library
+OpenCV - library for providing selective search and region proposals
+
+== How to run project ==
+The instructions include the steps to create the dataset, train the model, and evaluate it all from scratch. If you want to simply see the demonstration of the model, skip to step 3.
+
+
+1) From the root directory, run dataset.py to create the larger image repository that will be used for training the model:
+
+python .\dataset.py
+
+This will generate a new folder labeled "dataset" which will contain two folders, "no_raccoon" and "raccoon", each containing 1000+ images
+
+2) From the root directory with the newly formed "dataset", run the fine_tune python file to create the model that will be used for object detection:
+
+python .\fine_tune.py
+
+You can also decide on the output file name and location for the graph using the following:
+
+python .\fine_tune.py --plot NAME.png
+
+By default, the plot will be saved as plot.png. The output of the file training is a .h5 file of the trained model, a .pickle encoder for storing and retrieving the objects used in training, and a .png file of the training of the model.
+
+3) From the root directory with the new files in place, run the object_detect python file to observe the model doing object detection on a target image (an image is provided):
+
+python .\object_detect.py --image .\raccoon-1.jpg
+
+The command does not have a default image selected, so it is important to have an image selected for the script. The script will provide two windows showing before and after imagery of the object detection task on the target image.
